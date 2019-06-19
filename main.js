@@ -2,13 +2,16 @@ import { parse } from "himalaya";
 import { html } from "./html";
 
 const getData = elements => {
-  return elements[0].children[0].content.replace("Avaliou em: ", "");
+  return elements[0].children[0].content
+    .replace("Avaliou em: ", "")
+    .replace(/(\r\n|\n|\r)/gm, "");
 };
 
 const getPessoa = elements => {
   return elements[1].children
     .filter(e => e.type == "element")
-    .filter(e => e.tagName == "p")[0].children[0].content;
+    .filter(e => e.tagName == "p")[0]
+    .children[0].content.replace(/(\r\n|\n|\r)/gm, "");
 };
 
 const getNota = elements => {
@@ -20,7 +23,8 @@ const getNota = elements => {
     .children.filter(e => e.type == "element")[0]
     .children.filter(e => e.type == "element")[0]
     .children.filter(e => e.type == "element")[0]
-    .children.filter(e => e.type == "element")[0].children[0].content;
+    .children.filter(e => e.type == "element")[0]
+    .children[0].content.replace(/(\r\n|\n|\r)/gm, "");
 };
 
 const getPros = elements => {
@@ -37,7 +41,7 @@ const getPros = elements => {
 
   const index = busca.length - 2;
 
-  return busca[index].children[1].content;
+  return busca[index].children[1].content.replace(/(\r\n|\n|\r)/gm, "");
 };
 
 const json = parse(html);
@@ -58,4 +62,4 @@ const list = json[0].children
     };
   });
 
-console.log(list);
+console.table(list);
