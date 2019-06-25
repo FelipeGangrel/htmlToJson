@@ -1,4 +1,3 @@
-import { parse } from "himalaya";
 import { html } from "./html";
 
 const getData = elements => {
@@ -44,7 +43,7 @@ const getPros = elements => {
   return busca[index].children[1].content.replace(/(\r\n|\n|\r)/gm, "");
 };
 
-const json = parse(html);
+const json = window.himalaya.parse(html);
 const list = json[0].children
   .filter(e => e.tagName == "body")[0]
   .children.filter(e => e.tagName == "li")
